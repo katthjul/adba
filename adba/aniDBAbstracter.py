@@ -253,9 +253,10 @@ class Episode(aniDBabstractObject):
 			(self.ed2k, self.size) = self._calculate_file_stuff(self.filePath)
 
 		self.rawData = self.aniDB.file(fid=self.fid, size=self.size, ed2k=self.ed2k, aid=self.aid, aname=None, gid=None, gname=None, epno=self.epno, fmask=self.bitCodeF, amask=self.bitCodeA)
-		self._fill(self.rawData.datalines[0])
-		self._build_names()
-		self.laoded = True
+		if self.rawData.datalines:
+			self._fill(self.rawData.datalines[0])
+			self._build_names()
+			self.laoded = True
 
 	def add_to_mylist(self, state=None, viewed=None, source=None, storage=None, other=None):
 		"""

@@ -68,9 +68,8 @@ class AniDBLink(threading.Thread):
 			return False;
 
 	def disconnectSocket(self):
-		self.sock.shutdown(socket.SHUT_RD)
-		# close is not called as the garbage collection from python will handle this for us.  Calling close can also cause issues with the threaded code.
-		# self.sock.close()
+		# an UDP socket does not have a connection to shutdown
+		self.sock.close()
 
 	def stop (self):
 		logging.info("Releasing socket and stopping link thread")
